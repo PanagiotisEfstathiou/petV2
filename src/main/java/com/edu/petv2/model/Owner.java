@@ -17,22 +17,26 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Owner extends BaseModel{
+public class Owner extends Account{
 
-//    @OneToMany(mappedBy = "owner")
-//    @Nullable
-//    @ToString.Exclude
-//    private List<Animal> petsOwned;
-//
-//    @OneToMany(mappedBy = "owner")
-//    @ToString.Exclude
-//    @Nullable
-//    private List<Booking> bookingHistory;
+    @OneToMany(mappedBy = "owner")
+    @Nullable
+    @ToString.Exclude
+    private List<Animal> petsOwned;
 
-    private String name;
-    @Column(unique = true)
-    private String mail;
-    private String password;
+    @OneToMany(mappedBy = "owner")
+    @ToString.Exclude
+    @Nullable
+    private List<Booking> bookingHistory;
+
+    public Owner(String name, String password, String email){
+        setName(name);
+        setPassword(password);
+        setMail(email);
+    }
+
+
+
 
 
 
