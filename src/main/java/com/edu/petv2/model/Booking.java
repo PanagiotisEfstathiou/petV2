@@ -1,6 +1,5 @@
 package com.edu.petv2.model;
 
-import com.edu.petv2.model.Account;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,24 +8,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "Bookings")
-public class Booking {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+@SequenceGenerator(name = "idGenerator", sequenceName = "Bookings_seq", initialValue = 1, allocationSize = 1)
+public class Booking extends BaseModel{
 
     @ManyToOne()
     private Owner owner;
 
     @ManyToOne
-    private Carer carer;
+    private Sitter sitter;
 
     private Date startingDate;
 

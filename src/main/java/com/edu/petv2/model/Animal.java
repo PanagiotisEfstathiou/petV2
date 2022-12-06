@@ -18,8 +18,7 @@ public class Animal extends BaseModel {
     @ManyToOne
     private Owner owner;
 
-    @ManyToOne
-    private Carer carer;
+
 
 
 }

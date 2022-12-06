@@ -5,6 +5,7 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -17,6 +18,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@SequenceGenerator(name = "idGenerator", sequenceName = "Owners_seq", initialValue = 1, allocationSize = 1)
 public class Owner extends Account{
 
     @OneToMany(mappedBy = "owner")
