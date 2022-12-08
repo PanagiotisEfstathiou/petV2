@@ -1,11 +1,10 @@
 package com.edu.petv2.model;
 
 
-import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
+
+import com.edu.petv2.controller.OwnerController;
+import com.sun.istack.Nullable;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -13,13 +12,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Table(name = "OWNERS")
 @SequenceGenerator(name = "idGenerator", sequenceName = "Owners_seq", initialValue = 1, allocationSize = 1)
 public class Owner extends Account{
+
 
     @OneToMany(mappedBy = "owner")
     @Nullable
@@ -31,12 +30,15 @@ public class Owner extends Account{
     @Nullable
     private List<Booking> bookingHistory;
 
-    public Owner(String name, String password, String email){
-        setName(name);
-        setPassword(password);
-        setMail(email);
-    }
-
+//    private String name;
+//    @Column(unique = true)
+//    private String mail;
+//    private String password;
+public Owner (String name, String mail, String password){
+    setName(name);
+    setMail(mail);
+    setPassword(password);
+}
 
 
 

@@ -1,8 +1,6 @@
 package com.edu.petv2.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +20,12 @@ public class Sitter extends Account{
 
     @OneToMany
     private List<Animal> currentlyHosting;
+
+    public Sitter (String name, String mail, String password){
+        setName(name);
+        setMail(mail);
+        setPassword(password);
+    }
 
 }
 

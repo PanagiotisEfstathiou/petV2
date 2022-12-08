@@ -5,7 +5,9 @@ import com.edu.petv2.base.BaseComponent;
 import com.edu.petv2.model.BaseModel;
 import com.edu.petv2.service.BaseService;
 import com.edu.petv2.transfer.ApiResponse;
-import jakarta.validation.Valid;
+
+
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

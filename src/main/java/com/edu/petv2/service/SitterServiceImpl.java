@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class SitterServiceImpl extends BaseServiceImpl<Sitter>{
+public class SitterServiceImpl extends BaseServiceImpl<Sitter> implements SitterService{
     SitterRepository sitterRepository;
     @Override
     public JpaRepository<Sitter, Long> getRepository() {
