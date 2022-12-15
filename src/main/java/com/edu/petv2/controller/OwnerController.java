@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("Owners")
+@CrossOrigin("*")
 public class OwnerController extends AbstractController<Owner> {
 
     private final OwnerService ownerService;
