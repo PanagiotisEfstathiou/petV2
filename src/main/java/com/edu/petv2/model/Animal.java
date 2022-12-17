@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Animal extends BaseModel {
 
     private String name;
-    private String age;
+    private int age;
     @ManyToOne
     private Owner owner;
 
