@@ -7,13 +7,10 @@ import org.hibernate.Hibernate;
 import java.util.Objects;
 
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
-public class Account extends BaseModel {
+@Data
+@EqualsAndHashCode
+public abstract class Account extends BaseModel {
 
     private String name;
     @Column(unique = true)
