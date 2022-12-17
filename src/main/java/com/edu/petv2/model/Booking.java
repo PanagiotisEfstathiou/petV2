@@ -21,6 +21,8 @@ public class Booking extends BaseModel{
 
     @ManyToOne
     private Sitter sitter;
+    
+    private String content;
 
     private Date startingDate;
 
