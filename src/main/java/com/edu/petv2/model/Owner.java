@@ -2,14 +2,11 @@ package com.edu.petv2.model;
 
 
 
-import com.edu.petv2.controller.OwnerController;
 import com.sun.istack.Nullable;
 import javax.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @AllArgsConstructor
