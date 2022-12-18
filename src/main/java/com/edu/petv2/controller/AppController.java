@@ -1,8 +1,7 @@
 package com.edu.petv2.controller;
 
 
-import com.edu.petv2.dto.AnimalDto;
-import com.edu.petv2.dto.OwnerDto;
+import com.edu.petv2.dto.*;
 import com.edu.petv2.service.AppService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +23,9 @@ public class AppController {
         return appService.createAnimal(ownerId, animalDto);
     }
 
+    @PostMapping("/newSitter")
+    public SitterDto createSitter(@RequestBody SitterDto sitterDto) {return appService.createSitter(sitterDto);}
+
     //Body:
     //    {
     //        "name" : "alpha",
@@ -31,6 +33,15 @@ public class AppController {
     //            "password" : "asdf"
     //    }
 
+    @PostMapping("/newRev/{ownerId}/{sitterId}")
+    public ReviewDto writeReview(@PathVariable(name = "ownerId") long ownerId, @PathVariable(name = "sitterId") long sitterId , @RequestBody ReviewDto reviewDto){
+        return appService.writeReview(ownerId , reviewDto, sitterId);
+    }
+
+    @PostMapping("/newBooking/{ownerId}/{sitterId}")
+    public BookingDto book(@PathVariable(name = "ownerId") long ownerId, @PathVariable(name = "sitterId") long sitterId , @RequestBody BookingDto bookingDto){
+        return appService.makeABooking(ownerId , sitterId, bookingDto);
+    }
 
 
 

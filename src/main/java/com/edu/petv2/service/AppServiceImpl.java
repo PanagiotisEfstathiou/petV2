@@ -1,14 +1,9 @@
 package com.edu.petv2.service;
 
-import com.edu.petv2.dto.AnimalDto;
-import com.edu.petv2.dto.OwnerDto;
-import com.edu.petv2.dto.SitterDto;
-import com.edu.petv2.model.Animal;
-import com.edu.petv2.model.Sitter;
-import com.edu.petv2.repository.AnimalRepository;
-import com.edu.petv2.model.Owner;
-import com.edu.petv2.repository.OwnerRepository;
-import com.edu.petv2.repository.SitterRepository;
+import com.edu.petv2.dto.*;
+import com.edu.petv2.model.*;
+import com.edu.petv2.repository.*;
+import java.util.Date;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +19,8 @@ public class AppServiceImpl implements AppService {
 
     @Autowired
     private SitterRepository sitterRepository;
+    private final ReviewRepository reviewRepository;
+    private final BookingRepository bookingRepository;
 
     @Override
     public OwnerDto createOwner(OwnerDto ownerDto) {
@@ -42,9 +39,35 @@ public class AppServiceImpl implements AppService {
         return new AnimalDto(animal);
     }
 
-    public SitterDto createSitter(long id, SitterDto sitterDto){
+    public SitterDto createSitter(SitterDto sitterDto){
         Sitter sitter = sitterDto.asSitter();
         sitterRepository.save(sitter);
         return new SitterDto(sitter);
+    }
+
+    @Override
+    public ReviewDto writeReview(long ownerId, ReviewDto reviewDto, long sitterId) {
+        Optional<Owner> author = ownerRepository.findById(ownerId);
+        Optional<Sitter> sitter = sitterRepository.findById(sitterId);
+        Review review = reviewDto.asReview();
+        review.setAuthor(author.get());
+        review.setReceiver(sitter.get());
+        review.setContent(reviewDto.getContent());
+        review.setDate(new Date());
+        reviewRepository.save(review);
+        return new ReviewDto(review);
+    }
+
+    @Override
+    public BookingDto makeABooking(long ownerId, long sitterId, BookingDto bookingDto) {
+        Optional<Owner> owner = ownerRepository.findById(ownerId);
+        Optional<Sitter> sitter = sitterRepository.findById(sitterId);
+        Booking booking = bookingDto.asBooking();
+        booking.setOwner(owner.get());
+        booking.setSitter(sitter.get());
+        booking.setStartingDate(new Date());
+        booking.setEndingDate(bookingDto.getEndingDate());
+        bookingRepository.save(booking);
+        return new BookingDto(booking);
     }
 }

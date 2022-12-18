@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 @SequenceGenerator(name = "idGenerator", sequenceName = "Sitter_seq", initialValue = 1, allocationSize = 1)
 public class Sitter extends Account{
-    private boolean available;
 
     @OneToMany(mappedBy = "sitter")
     private List<Booking> bookingHistory;
