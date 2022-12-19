@@ -65,7 +65,7 @@ public class AppServiceImpl implements AppService {
         Booking booking = bookingDto.asBooking();
         booking.setOwner(owner.get());
         booking.setSitter(sitter.get());
-        booking.setStartingDate(new Date());
+        booking.setStartingDate(bookingDto.getStartingDate());
         booking.setEndingDate(bookingDto.getEndingDate());
         bookingRepository.save(booking);
         return new BookingDto(booking);
