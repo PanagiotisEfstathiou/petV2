@@ -27,18 +27,5 @@ public class Owner extends Account{
     @Nullable
     private List<Booking> bookingHistory;
 
-//    private String name;
-//    @Column(unique = true)
-//    private String mail;
-//    private String password;
-public Owner (String name, String mail, String password){
-    setName(name);
-    setMail(mail);
-    setPassword(password);
-}
-
-
-
-
 
 }
