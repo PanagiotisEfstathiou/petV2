@@ -1,6 +1,6 @@
 package com.edu.petv2.dto;
 
-import com.edu.petv2.model.Owner;
+import com.edu.petv2.model.PetsAllowed;
 import com.edu.petv2.model.Sitter;
 import lombok.*;
 
@@ -15,12 +15,15 @@ public class SitterDto {
     private String mail;
     private String password;
 
+    private PetsAllowed petsAllowed;
+
 
     public SitterDto(Sitter sitter) {
         this.id = sitter.getId();
         this.name = sitter.getName();
         this.mail = sitter.getMail();
         this.password = sitter.getPassword();
+        this.petsAllowed = PetsAllowed.valueOf(sitter.getPetsAllowed());
     }
 
     public Sitter asSitter(){
@@ -29,6 +32,7 @@ public class SitterDto {
         sitter.setName(name);
         sitter.setMail(mail);
         sitter.setPassword(password);
+        sitter.setPetsAllowed(String.valueOf(petsAllowed));
         return sitter;
     }
 

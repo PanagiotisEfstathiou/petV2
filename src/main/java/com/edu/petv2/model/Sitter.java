@@ -20,11 +20,8 @@ public class Sitter extends Account{
     @OneToMany
     private List<Animal> currentlyHosting;
 
-    public Sitter (String name, String mail, String password){
-        setName(name);
-        setMail(mail);
-        setPassword(password);
-    }
+
+    private String petsAllowed;
 
 }
 
