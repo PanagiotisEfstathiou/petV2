@@ -1,8 +1,11 @@
 package com.edu.petv2.service;
 
 import com.edu.petv2.dto.*;
+import com.edu.petv2.exception.AccountCreationException;
+import com.edu.petv2.exception.BookingCreationException;
 import com.edu.petv2.model.Review;
 import java.awt.print.Book;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +18,10 @@ SitterDto createSitter(SitterDto sitterDto);
 
 ReviewDto writeReview(long ownerId,  ReviewDto reviewDto, long sitterId);
 
-BookingDto makeABooking(long ownerId, long sitterId, BookingDto bookingDto);
+BookingDto makeABooking(long ownerId, long sitterId, BookingDto bookingDto) throws BookingCreationException;
+List<SitterDto> findSitterByPet(String petsAllowed);
 
+OwnerDto getOwnerById(Long id);
+
+SitterDto getSitterById(Long id);
 }

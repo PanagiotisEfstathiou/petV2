@@ -2,7 +2,11 @@ package com.edu.petv2.controller;
 
 
 import com.edu.petv2.dto.*;
+import com.edu.petv2.exception.AccountCreationException;
+import com.edu.petv2.exception.BookingCreationException;
 import com.edu.petv2.service.AppService;
+import java.util.List;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +28,7 @@ public class AppController {
     }
 
     @PostMapping("/newSitter")
-    public SitterDto createSitter(@RequestBody SitterDto sitterDto) {return appService.createSitter(sitterDto);}
+    public SitterDto createSitter(@RequestBody SitterDto sitterDto){return appService.createSitter(sitterDto);}
 
     //Body:
     //    {
@@ -39,10 +43,24 @@ public class AppController {
     }
 
     @PostMapping("/newBooking/{ownerId}/{sitterId}")
-    public BookingDto book(@PathVariable(name = "ownerId") long ownerId, @PathVariable(name = "sitterId") long sitterId , @RequestBody BookingDto bookingDto){
+    public BookingDto book(@PathVariable(name = "ownerId") long ownerId, @PathVariable(name = "sitterId") long sitterId , @RequestBody BookingDto bookingDto) throws BookingCreationException {
         return appService.makeABooking(ownerId , sitterId, bookingDto);
     }
 
+    @GetMapping("/sitter/{petsAllowed}")
+    public List<SitterDto> sitterByPet(@PathVariable(name = "petsAllowed") String petsA){
+        return appService.findSitterByPet(petsA);
+    }
+
+    @GetMapping("owner/{id}")
+    public OwnerDto getOwnerById(@PathVariable(name= "id") long id){
+        return appService.getOwnerById(id);
+    }
+
+    @GetMapping("sitter/{id}")
+    public SitterDto getSitterById(@PathVariable(name = "id") long id){
+        return appService.getSitterById(id);
+    }
 
 
 }

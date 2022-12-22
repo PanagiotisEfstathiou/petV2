@@ -1,10 +1,14 @@
 package com.edu.petv2.service;
 
 import com.edu.petv2.dto.*;
+import com.edu.petv2.exception.AccountCreationException;
+import com.edu.petv2.exception.BookingCreationException;
 import com.edu.petv2.model.*;
 import com.edu.petv2.repository.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +43,7 @@ public class AppServiceImpl implements AppService {
         return new AnimalDto(animal);
     }
 
-    public SitterDto createSitter(SitterDto sitterDto){
+    public SitterDto createSitter(SitterDto sitterDto) {
         Sitter sitter = sitterDto.asSitter();
         sitterRepository.save(sitter);
         return new SitterDto(sitter);
@@ -59,9 +63,15 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public BookingDto makeABooking(long ownerId, long sitterId, BookingDto bookingDto) {
+    public BookingDto makeABooking(long ownerId, long sitterId, BookingDto bookingDto) throws BookingCreationException {
         Optional<Owner> owner = ownerRepository.findById(ownerId);
+        if (owner.isEmpty()){
+            throw new BookingCreationException("Something went wrong regarding the owner");
+        }
         Optional<Sitter> sitter = sitterRepository.findById(sitterId);
+        if (sitter.isEmpty()){
+            throw new BookingCreationException("Something went wrong regarding the sitter");
+        }
         Booking booking = bookingDto.asBooking();
         booking.setOwner(owner.get());
         booking.setSitter(sitter.get());
@@ -69,5 +79,19 @@ public class AppServiceImpl implements AppService {
         booking.setEndingDate(bookingDto.getEndingDate());
         bookingRepository.save(booking);
         return new BookingDto(booking);
+    }
+
+    public List<SitterDto> findSitterByPet(String petsAllowed){
+        return sitterRepository.getSitterBy(petsAllowed).stream().map(SitterDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public OwnerDto getOwnerById(Long id) {
+        return new OwnerDto(ownerRepository.findById(id).get());
+    }
+
+    @Override
+    public SitterDto getSitterById(Long id) {
+        return new SitterDto(sitterRepository.findById(id).get());
     }
 }
