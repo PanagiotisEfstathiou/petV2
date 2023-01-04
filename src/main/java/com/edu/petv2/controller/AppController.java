@@ -47,7 +47,7 @@ public class AppController {
         return appService.makeABooking(ownerId , sitterId, bookingDto);
     }
 
-    @GetMapping("/sitter/{petsAllowed}")
+    @GetMapping("/sitterByPet/{petsAllowed}")
     public List<SitterDto> sitterByPet(@PathVariable(name = "petsAllowed") String petsA){
         return appService.findSitterByPet(petsA);
     }
