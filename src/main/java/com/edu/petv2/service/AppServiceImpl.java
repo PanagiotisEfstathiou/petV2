@@ -5,6 +5,7 @@ import com.edu.petv2.exception.AccountCreationException;
 import com.edu.petv2.exception.BookingCreationException;
 import com.edu.petv2.model.*;
 import com.edu.petv2.repository.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -93,5 +94,9 @@ public class AppServiceImpl implements AppService {
     @Override
     public SitterDto getSitterById(Long id) {
         return new SitterDto(sitterRepository.findById(id).get());
+    }
+
+    public List<Sitter> getAllSitters(){
+        return new ArrayList<>(sitterRepository.findAll());
     }
 }

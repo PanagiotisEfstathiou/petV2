@@ -4,6 +4,7 @@ package com.edu.petv2.controller;
 import com.edu.petv2.dto.*;
 import com.edu.petv2.exception.AccountCreationException;
 import com.edu.petv2.exception.BookingCreationException;
+import com.edu.petv2.model.Sitter;
 import com.edu.petv2.service.AppService;
 import java.util.List;
 import lombok.Getter;
@@ -62,5 +63,8 @@ public class AppController {
         return appService.getSitterById(id);
     }
 
-
+    @GetMapping("allSitters")
+    public List<Sitter> getAllSitters(){
+        return appService.getAllSitters();
+    }
 }
